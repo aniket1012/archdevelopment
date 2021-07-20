@@ -13,14 +13,15 @@ export default createTheme({
       main: `${arcBlue}`,
     },
     secondary: {
-        main: `${arcOrange}`
-    }
+      main: `${arcOrange}`,
+    },
   },
   typography: {
-      h3: {
-          fontWeight: 300
-      }
+    tab: {
+      ffontFamily: "Raleway",
+      textTransform: "none",
+      fontWeight: 700,
+      fontSize: "1rem",
+    },
   },
-
-
 });

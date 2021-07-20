@@ -39,12 +39,19 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: 'auto'
   },
   tab: {
-      fontFamily: 'Raleway',
-      textTransform: 'none',
-      fontWeight: 700,
-      fontSize: '1rem',
+      ...theme.typography.tab,
       minWidth: 10,
       marginLeft: '25px'
+  },
+  button: {
+      borderRadius: '50px',
+      marginLeft: '50px',
+      marginRight: '25px',
+      fontFamily: 'Pacifico',
+      fontSize: '1rem',
+      textTransform: 'none',
+      height: '45px',
+      color: 'white'
   }
 }));
 
@@ -67,6 +74,7 @@ const Header =(props)  => {
                            <Tab className={classes.tab} label='About Us'/>
                            <Tab className={classes.tab} label='Contact Us'/>
                        </Tabs>
+                       <Button variant='contained' color='secondary' className={classes.button}>Free Estimate</Button>
                     </Toolbar>
                 </AppBar>
             </ElevationScroll>
