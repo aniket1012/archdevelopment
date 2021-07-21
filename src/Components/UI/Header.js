@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {
   AppBar,
   Toolbar,
@@ -36,6 +36,13 @@ const useStyles = makeStyles((theme) => ({
   logo: {
     height: "7em",
   },
+  logoContainer: {
+    padding: 0,
+    "&:hover": {
+        backgroundColor: 'transparent'
+    }
+    
+  },
   tabContainer: {
       marginLeft: 'auto'
   },
@@ -50,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: '50px',
       marginRight: '25px',
       height: '45px',
-  }
+  },
 }));
 
 
@@ -66,12 +73,30 @@ const Header =(props)  => {
         setValue(value)
     }
 
+    useEffect(() => {
+        if (window.location.pathname === "/" && value !== 0) {
+          setValue(0);
+        } else if (window.location.pathname === "/services" && value !== 1) {
+          setValue(1);
+        } else if (window.location.pathname === "/revolution" && value !== 2) {
+          setValue(2);
+        } else if (window.location.pathname === "/about" && value !== 3) {
+          setValue(3);
+        } else if (window.location.pathname === "/contact" && value !== 4) {
+          setValue(4);
+        } else if (window.location.pathname === "/estimate" && value !== 5) {
+          setValue(5);
+        }
+    }, [value])
+
     return (
         <React.Fragment>
             <ElevationScroll>
                 <AppBar position='fixed' color='primary'>
                     <Toolbar disableGutters>
-                       <img src={logo} alt='company logo' className={classes.logo}/>
+                        <Button component={Link} to='/' className={classes.logoContainer} onclick={()=>setValue(0)} disableRipple>
+                            <img src={logo} alt='company logo' className={classes.logo}/>
+                        </Button>
                        <Tabs  
                         value={value}  
                         onChange={handleChange}
@@ -84,7 +109,7 @@ const Header =(props)  => {
                            <Tab className={classes.tab} component={Link} to='about' label='About Us'/>
                            <Tab className={classes.tab} component={Link} to='contact' label='Contact Us'/>
                        </Tabs>
-                       <Button variant='contained' color='secondary' className={classes.button}>Free Estimate</Button>
+                       <Button variant='contained' color='secondary' className={classes.button} component={Link} to='/estimate'>Free Estimate</Button>
                     </Toolbar>
                 </AppBar>
             </ElevationScroll>
