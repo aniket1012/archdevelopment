@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {
   AppBar,
   Toolbar,
@@ -11,6 +11,7 @@ import {
 
 import { makeStyles } from "@material-ui/core/styles";
 import logo from '../../assets/logo.svg'
+import { Link } from 'react-router-dom';
 
 
 function ElevationScroll(props) {
@@ -44,14 +45,11 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: '25px'
   },
   button: {
+      ...theme.typography.estimate,
       borderRadius: '50px',
       marginLeft: '50px',
       marginRight: '25px',
-      fontFamily: 'Pacifico',
-      fontSize: '1rem',
-      textTransform: 'none',
       height: '45px',
-      color: 'white'
   }
 }));
 
@@ -61,18 +59,30 @@ const Header =(props)  => {
 
     const classes = useStyles();
 
+    const[value, setValue] = useState(0)
+
+    const handleChange = (e, value) => {
+        console.log(e, value);
+        setValue(value)
+    }
+
     return (
         <React.Fragment>
             <ElevationScroll>
                 <AppBar position='fixed' color='primary'>
                     <Toolbar disableGutters>
                        <img src={logo} alt='company logo' className={classes.logo}/>
-                       <Tabs className={classes.tabContainer}>
-                           <Tab className={classes.tab} label='Home'/>
-                           <Tab className={classes.tab} label='Services'/>
-                           <Tab className={classes.tab} label='The Revolution'/>
-                           <Tab className={classes.tab} label='About Us'/>
-                           <Tab className={classes.tab} label='Contact Us'/>
+                       <Tabs  
+                        value={value}  
+                        onChange={handleChange}
+                        className={classes.tabContainer}
+                        indicatorColor='secondary'
+                    >
+                           <Tab className={classes.tab} component={Link} to='/' label='Home'/>
+                           <Tab className={classes.tab} component={Link} to='/services' label='Services'/>
+                           <Tab className={classes.tab} component={Link} to='/revolution' label='The Revolution'/>
+                           <Tab className={classes.tab} component={Link} to='about' label='About Us'/>
+                           <Tab className={classes.tab} component={Link} to='contact' label='Contact Us'/>
                        </Tabs>
                        <Button variant='contained' color='secondary' className={classes.button}>Free Estimate</Button>
                     </Toolbar>
