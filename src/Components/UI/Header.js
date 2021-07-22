@@ -84,6 +84,7 @@ const Header =(props)  => {
     const[value, setValue] = useState(0)
     const[anchorEl, setAnchorEl] = useState(null)
     const[open, setOpen] = useState(false)
+    const[selectedIndex, setSelectedIndex] = useState(0)
 
     const handleChange = (e, value) => {
         console.log(e, value);
@@ -95,11 +96,24 @@ const Header =(props)  => {
       setOpen(true)
     }
 
+    const handleMenuItemClick = (event, index) => {
+      setAnchorEl(null)
+      setOpen(false)
+      setSelectedIndex(index)
+    }
+
     const handleClose = (event) => {
       setAnchorEl(null)
       setOpen(false)
 
     }
+
+    const menuOptions = [
+      { name: "Services", link: "/services" },
+      { name: "Custome Software Development", link: "/customsoftware" },
+      { name: "Mobile App Development", link: "/mobileapps" },
+      { name: "Website Development", link: "/websites" },
+    ];
 
 
     useEffect(() => {
@@ -117,6 +131,60 @@ const Header =(props)  => {
           setValue(5);
         }
     }, [value])
+
+    switch(window.location.pathname) {
+      case "/":
+        if(value !== 0) {
+          setValue(0)
+        }
+        break
+      case "/services":
+        if(value !== 1) {
+          setValue(1)
+          setSelectedIndex(0)
+        }
+        break
+      case "/customSoftware":
+        if(value !== 1) {
+          setValue(1)
+          setSelectedIndex(1)
+        }
+        break
+      case "/mobileapps":
+        if(value !== 1) {
+          setValue(1)
+          setSelectedIndex(2)
+        }
+        break
+      case "/websites":
+        if(value !== 1) {
+          setValue(1)
+          setSelectedIndex(3)
+        }
+        break
+      case "/revolutions": 
+        if(value !== 2) {
+          setValue(2)
+        }
+        break
+      case "/about": 
+        if(value !== 3) {
+          setValue(3)
+        }
+        break
+      case "/contact":
+        if(value !== 4) {
+          setValue(4)
+        }
+        break
+      case "/estimate":
+        if(value !== 5) {
+          setValue(5)
+        }
+        break
+      default:
+          break
+    }
 
     return (
         <React.Fragment>
@@ -184,38 +252,18 @@ const Header =(props)  => {
                           classes={{paper: classes.menu}}
                           elevation={0}
                         >
-                          <MenuItem 
-                            onClick={() => {handleClose(); setValue(1)}}
-                            component={Link}
-                            to='/services'
-                            classes={{root: classes.menuItem}}
-                          >
-                            Services
-                          </MenuItem>
-                          <MenuItem 
-                            onClick={() => {handleClose(); setValue(1)}}
-                            component={Link}
-                            to='/customsoftware'
-                            classes={{root: classes.menuItem}}
-                          >
-                            Custom Software Development
-                          </MenuItem>
-                          <MenuItem 
-                            onClick={() => {handleClose(); setValue(1)}}
-                            component={Link}
-                            to='/mobileapps'
-                            classes={{root: classes.menuItem}}
-                          >
-                            Mobile App Development
-                          </MenuItem>
-                          <MenuItem 
-                            onClick={() => {handleClose(); setValue(1)}}
-                            component={Link}
-                            to='/websites'
-                            classes={{root: classes.menuItem}}
-                          >
-                            Website Development
-                          </MenuItem>
+                          {menuOptions.map((option, index) => (
+                            <MenuItem
+                              // key={option}
+                              component={Link}
+                              to={option.link}
+                              classes={{root: classes.menuItem}}
+                              onClick={(event)=>{handleMenuItemClick(event,index); setValue(1); handleClose()}}
+                              selected={index === selectedIndex && value === 1}
+                            >
+                              {option.name}
+                            </MenuItem>
+                          ))}
                         </Menu>
                     </Toolbar>
                 </AppBar>
