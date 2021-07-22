@@ -61,6 +61,18 @@ const useStyles = makeStyles((theme) => ({
       marginRight: '25px',
       height: '45px',
   },
+  menu: {
+    backgroundColor: theme.palette.common.arcBlue,
+    color: 'white',
+    borderRadius: '0px'
+  },
+  menuItem: {
+    ...theme.typography.tab,
+    opacity: 0.7,
+    "&:hover": {
+      opacity: 1
+    }
+  }
 }));
 
 
@@ -111,7 +123,7 @@ const Header =(props)  => {
             <ElevationScroll>
                 <AppBar position='fixed' color='primary'>
                     <Toolbar disableGutters>
-                        <Button component={Link} to='/' className={classes.logoContainer} onclick={()=>setValue(0)} disableRipple>
+                        <Button component={Link} to='/' className={classes.logoContainer} onClick={()=>setValue(0)} disableRipple>
                             <img src={logo} alt='company logo' className={classes.logo}/>
                         </Button>
                        <Tabs  
@@ -169,10 +181,41 @@ const Header =(props)  => {
                           open={open} 
                           onClose={handleClose}
                           MenuListProps={{onMouseLeave: handleClose}}
+                          classes={{paper: classes.menu}}
+                          elevation={0}
                         >
-                          <MenuItem onClick={handleClose}>Custom Software Development</MenuItem>
-                          <MenuItem onClick={handleClose}>Mobile App Development</MenuItem>
-                          <MenuItem onClick={handleClose}>Website Development</MenuItem>
+                          <MenuItem 
+                            onClick={() => {handleClose(); setValue(1)}}
+                            component={Link}
+                            to='/services'
+                            classes={{root: classes.menuItem}}
+                          >
+                            Services
+                          </MenuItem>
+                          <MenuItem 
+                            onClick={() => {handleClose(); setValue(1)}}
+                            component={Link}
+                            to='/customsoftware'
+                            classes={{root: classes.menuItem}}
+                          >
+                            Custom Software Development
+                          </MenuItem>
+                          <MenuItem 
+                            onClick={() => {handleClose(); setValue(1)}}
+                            component={Link}
+                            to='/mobileapps'
+                            classes={{root: classes.menuItem}}
+                          >
+                            Mobile App Development
+                          </MenuItem>
+                          <MenuItem 
+                            onClick={() => {handleClose(); setValue(1)}}
+                            component={Link}
+                            to='/websites'
+                            classes={{root: classes.menuItem}}
+                          >
+                            Website Development
+                          </MenuItem>
                         </Menu>
                     </Toolbar>
                 </AppBar>
