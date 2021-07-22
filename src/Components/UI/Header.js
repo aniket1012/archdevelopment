@@ -7,7 +7,10 @@ import {
   useScrollTrigger,
   Tab,
   Tabs,
+  Menu,
+  MenuItem
 } from "@material-ui/core";
+
 
 import { makeStyles } from "@material-ui/core/styles";
 import logo from '../../assets/logo.svg'
@@ -67,11 +70,25 @@ const Header =(props)  => {
     const classes = useStyles();
 
     const[value, setValue] = useState(0)
+    const[anchorEl, setAnchorEl] = useState(null)
+    const[open, setOpen] = useState(false)
 
     const handleChange = (e, value) => {
         console.log(e, value);
         setValue(value)
     }
+
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget)
+      setOpen(true)
+    }
+
+    const handleClose = (event) => {
+      setAnchorEl(null)
+      setOpen(false)
+
+    }
+
 
     useEffect(() => {
         if (window.location.pathname === "/" && value !== 0) {
@@ -103,13 +120,60 @@ const Header =(props)  => {
                         className={classes.tabContainer}
                         indicatorColor='secondary'
                     >
-                           <Tab className={classes.tab} component={Link} to='/' label='Home'/>
-                           <Tab className={classes.tab} component={Link} to='/services' label='Services'/>
-                           <Tab className={classes.tab} component={Link} to='/revolution' label='The Revolution'/>
-                           <Tab className={classes.tab} component={Link} to='about' label='About Us'/>
-                           <Tab className={classes.tab} component={Link} to='contact' label='Contact Us'/>
+                           <Tab 
+                              className={classes.tab} 
+                              component={Link} 
+                              to='/' 
+                              label='Home'
+                            />
+                           <Tab 
+                              className={classes.tab} 
+                              component={Link} 
+                              to='/services' 
+                              label='Services'
+                              aria-owns={anchorEl ? "simple-menu" : undefined}
+                              aria-haspopup={anchorEl ? "true" : undefined}
+                              onMouseOver={(event) => handleClick(event)}
+                            />
+                           <Tab 
+                              className={classes.tab} 
+                              component={Link} 
+                              to='/revolution' 
+                              label='The Revolution'
+                            />
+                           <Tab 
+                              className={classes.tab} 
+                              component={Link} 
+                              to='about' 
+                              label='About Us'
+                            />
+                           <Tab 
+                              className={classes.tab} 
+                              component={Link} 
+                              to='contact' 
+                              label='Contact Us'
+                            />
                        </Tabs>
-                       <Button variant='contained' color='secondary' className={classes.button} component={Link} to='/estimate'>Free Estimate</Button>
+                       <Button 
+                          variant='contained' 
+                          color='secondary' 
+                          className={classes.button} 
+                          component={Link} 
+                          to='/estimate'
+                        >
+                            Free Estimate
+                        </Button>
+                        <Menu 
+                          id='simple-menu' 
+                          anchorEl={anchorEl} 
+                          open={open} 
+                          onClose={handleClose}
+                          MenuListProps={{onMouseLeave: handleClose}}
+                        >
+                          <MenuItem onClick={handleClose}>Custom Software Development</MenuItem>
+                          <MenuItem onClick={handleClose}>Mobile App Development</MenuItem>
+                          <MenuItem onClick={handleClose}>Website Development</MenuItem>
+                        </Menu>
                     </Toolbar>
                 </AppBar>
             </ElevationScroll>
