@@ -10,8 +10,10 @@ import {
   Menu,
   MenuItem,
   useMediaQuery,
+  SwipeableDrawer,
 } from "@material-ui/core";
 
+import MenuIcon from "@material-ui/icons/Menu";
 
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import logo from '../../assets/logo.svg'
@@ -93,31 +95,33 @@ const Header =(props)  => {
 
     const classes = useStyles();
     const theme = useTheme()
+    const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
     const matches = useMediaQuery(theme.breakpoints.down('md'))
+
+    const [openDrawer, setOpenDrawer] = useState(false)
     const[value, setValue] = useState(0)
     const[anchorEl, setAnchorEl] = useState(null)
-    const[open, setOpen] = useState(false)
+    const[openMenu, setOpenMenu] = useState(false)
     const[selectedIndex, setSelectedIndex] = useState(0)
 
-    const handleChange = (e, value) => {
-        console.log(e, value);
-        setValue(value)
+    const handleChange = (e, newValue) => {
+        setValue(newValue)
     }
 
     const handleClick = (event) => {
       setAnchorEl(event.currentTarget)
-      setOpen(true)
+      setOpenMenu(true)
     }
 
     const handleMenuItemClick = (event, index) => {
       setAnchorEl(null)
-      setOpen(false)
+      setOpenMenu(false)
       setSelectedIndex(index)
     }
 
     const handleClose = (event) => {
       setAnchorEl(null)
-      setOpen(false)
+      setOpenMenu(false)
 
     }
 
@@ -248,7 +252,7 @@ const Header =(props)  => {
         <Menu
           id="simple-menu"
           anchorEl={anchorEl}
-          open={open}
+          open={openMenu}
           onClose={handleClose}
           MenuListProps={{ onMouseLeave: handleClose }}
           classes={{ paper: classes.menu }}
@@ -273,6 +277,23 @@ const Header =(props)  => {
         </Menu>
       </React.Fragment>
     );
+
+    const drawer = (
+      <React.Fragment>
+        <SwipeableDrawer
+          disableBackdropTransition={!iOS}
+          disableDiscovery={iOS}
+          open={openDrawer}
+          onClose={() => setOpenDrawer(false)}
+          onOpen={() => setOpenDrawer(true)}
+        >
+          Example Drawer
+        </SwipeableDrawer>
+        <IconButton onClick={() => setOpenDrawer(!openDrawer)} disableRipple>
+          <MenuIcon />
+        </IconButton>
+      </React.Fragment>
+    );
     return (
         <React.Fragment>
             <ElevationScroll>
@@ -281,7 +302,7 @@ const Header =(props)  => {
                         <Button component={Link} to='/' className={classes.logoContainer} onClick={()=>setValue(0)} disableRipple>
                             <img src={logo} alt='company logo' className={classes.logo}/>
                         </Button>
-                        {matches ? null : tabs}
+                        {matches ? drawer : tabs}
                     </Toolbar>
                 </AppBar>
             </ElevationScroll>
