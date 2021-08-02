@@ -17,7 +17,7 @@ function App() {
       <BrowserRouter>
       <Header />
       <Switch>
-        <Route exact path='/' component={() => <div>HOME</div>}/>
+        <Route exact path='/' component={() => <div style={{height: '2000px'}}>HOME</div>}/>
         <Route exact path='/services' component={() => <div>services</div>}/>
         <Route exact path='/customsoftware' component={() => <div>customsoftware</div>}/>
         <Route exact path='/mobileapps' component={() => <div>mobileapps</div>}/>
