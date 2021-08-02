@@ -131,13 +131,12 @@ const Header =(props)  => {
     const matches = useMediaQuery(theme.breakpoints.down('md'))
 
     const [openDrawer, setOpenDrawer] = useState(false)
-    const[value, setValue] = useState(0)
+    
     const[anchorEl, setAnchorEl] = useState(null)
     const[openMenu, setOpenMenu] = useState(false)
-    const[selectedIndex, setSelectedIndex] = useState(0)
-
+    
     const handleChange = (e, newValue) => {
-        setValue(newValue)
+        props.setValue(newValue)
     }
 
     const handleClick = (event) => {
@@ -148,7 +147,7 @@ const Header =(props)  => {
     const handleMenuItemClick = (event, index) => {
       setAnchorEl(null)
       setOpenMenu(false)
-      setSelectedIndex(index)
+      props.setSelectedIndex(index)
     }
 
     const handleClose = (event) => {
@@ -176,10 +175,10 @@ const Header =(props)  => {
       [...menuOptions, ...routes].forEach(route => {
         switch(window.location.pathname) {
           case `${route.link}`:
-            if(value !== route.activeIndex) {
-              setValue(route.activeIndex)
-              if(route.selectedIndex && route.selectedIndex !== selectedIndex) {
-                setSelectedIndex(route.selectedIndex)
+            if(props.value !== route.activeIndex) {
+              props.setValue(route.activeIndex)
+              if(route.selectedIndex && route.selectedIndex !== props.selectedIndex) {
+                props.setSelectedIndex(route.selectedIndex)
               }
             }
             break;
@@ -187,14 +186,14 @@ const Header =(props)  => {
               break;
         }
       })
-       }, [value,menuOptions,selectedIndex,routes])
+       }, [props.value,menuOptions,props.selectedIndex,routes, props])
 
     
 
     const tabs = (
       <React.Fragment>
         <Tabs
-          value={value}
+          value={props.value}
           onChange={handleChange}
           className={classes.tabContainer}
           indicatorColor="secondary"
@@ -240,10 +239,10 @@ const Header =(props)  => {
               classes={{ root: classes.menuItem }}
               onClick={(event) => {
                 handleMenuItemClick(event, index);
-                setValue(1);
+                props.setValue(1);
                 handleClose();
               }}
-              selected={index === selectedIndex && value === 1}
+              selected={index === props.selectedIndex && props.value === 1}
             >
               {option.name}
             </MenuItem>
@@ -267,12 +266,12 @@ const Header =(props)  => {
             {routes.map((route,index)=> (
               <ListItem
                 key={`${route}${route.activeIndex}`}
-                onClick={() => {setOpenDrawer(false); setValue(route.activeIndex)}}
+                onClick={() => {setOpenDrawer(false); props.setValue(route.activeIndex)}}
                 divider
                 button
                 component={Link}
                 to={route.link}
-                selected={value === route.activeIndex}
+                selected={props.value === route.activeIndex}
                 classes={{selected: classes.drawerItemSelected}}
               >
                 <ListItemText
@@ -289,8 +288,8 @@ const Header =(props)  => {
               component={Link} 
               to={"/estimate"}  
               classes={{root: classes.drawerItemEstimate, selected: classes.drawerItemSelected}} 
-              onClick={() => {setOpenDrawer(false); setValue(5)}}
-              selected={value === 5}
+              onClick={() => {setOpenDrawer(false); props.setValue(5)}}
+              selected={props.value === 5}
             >
               <ListItemText  
                 className={classes.drawerItem}
@@ -311,7 +310,7 @@ const Header =(props)  => {
             <ElevationScroll>
                 <AppBar position='fixed' color='primary' className={classes.appbar}>
                     <Toolbar disableGutters>
-                        <Button component={Link} to='/' className={classes.logoContainer} onClick={()=>setValue(0)} disableRipple>
+                        <Button component={Link} to='/' className={classes.logoContainer} onClick={()=>props.setValue(0)} disableRipple>
                             <img src={logo} alt='company logo' className={classes.logo}/>
                         </Button>
                         {matches ? drawer : tabs}
