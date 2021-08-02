@@ -5,6 +5,7 @@ import {
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Header from './UI/Header';
+import Footer from './UI/Footer';
 import theme from './UI/Theme'
 
 
@@ -26,6 +27,7 @@ function App() {
         <Route exact path='/contact' component={() => <div>contact</div>}/>
         <Route exact path='/estimate' component={() => <div>estimate</div>}/>
       </Switch>
+      <Footer/>
       </BrowserRouter>
      
     </ThemeProvider>
