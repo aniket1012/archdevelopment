@@ -1,7 +1,8 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/styles'
 import { 
-    Grid 
+    Grid,
+    Hidden 
     } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 
@@ -46,152 +47,154 @@ function Footer(props) {
 
     return (
       <footer className={classes.footer}>
-        <Grid container justify="center" className={classes.mainContainer}>
-          <Grid item className={classes.gridItem}>
-            <Grid container direction="column" spacing={2}>
-              <Grid
-                item
-                className={classes.link}
-                component={Link}
-                to="/"
-                onClick={() => props.setValue(0)}
-              >
-                Home
-              </Grid>
+          <Hidden mdDown>
+            <Grid container justify="center" className={classes.mainContainer}>
+            <Grid item className={classes.gridItem}>
+                <Grid container direction="column" spacing={2}>
+                <Grid
+                    item
+                    className={classes.link}
+                    component={Link}
+                    to="/"
+                    onClick={() => props.setValue(0)}
+                >
+                    Home
+                </Grid>
+                </Grid>
             </Grid>
-          </Grid>
-          <Grid item className={classes.gridItem}>
-            <Grid container direction="column" spacing={2}>
-              <Grid
-                item
-                className={classes.link}
-                component={Link}
-                to="/services"
-                onClick={() => {
-                  props.setValue(1);
-                  props.setSelectedIndex(0);
-                }}
-              >
-                Services
-              </Grid>
-              <Grid
-                item
-                className={classes.link}
-                component={Link}
-                to="/customsoftware"
-                onClick={() => {props.setValue(1); props.setSelectedIndex(1)}}
-              >
-                Custom Software Development
-              </Grid>
-              <Grid
-                item
-                className={classes.link}
-                component={Link}
-                to="/mobileapps"
-                onClick={() => {
-                  props.setValue(1);
-                  props.setSelectedIndex(2);
-                }}
-              >
-                Mobile App Development
-              </Grid>
-              <Grid
-                item
-                className={classes.link}
-                component={Link}
-                to="/websites"
-                onClick={() => {
-                  props.setValue(1);
-                  props.setSelectedIndex(3);
-                }}
-              >
-                Website Development
-              </Grid>
+            <Grid item className={classes.gridItem}>
+                <Grid container direction="column" spacing={2}>
+                <Grid
+                    item
+                    className={classes.link}
+                    component={Link}
+                    to="/services"
+                    onClick={() => {
+                    props.setValue(1);
+                    props.setSelectedIndex(0);
+                    }}
+                >
+                    Services
+                </Grid>
+                <Grid
+                    item
+                    className={classes.link}
+                    component={Link}
+                    to="/customsoftware"
+                    onClick={() => {props.setValue(1); props.setSelectedIndex(1)}}
+                >
+                    Custom Software Development
+                </Grid>
+                <Grid
+                    item
+                    className={classes.link}
+                    component={Link}
+                    to="/mobileapps"
+                    onClick={() => {
+                    props.setValue(1);
+                    props.setSelectedIndex(2);
+                    }}
+                >
+                    Mobile App Development
+                </Grid>
+                <Grid
+                    item
+                    className={classes.link}
+                    component={Link}
+                    to="/websites"
+                    onClick={() => {
+                    props.setValue(1);
+                    props.setSelectedIndex(3);
+                    }}
+                >
+                    Website Development
+                </Grid>
+                </Grid>
             </Grid>
-          </Grid>
-          <Grid item className={classes.gridItem}>
-            <Grid container direction="column" spacing={2}>
-              <Grid
-                item
-                className={classes.link}
-                component={Link}
-                to="/revolution"
-                onClick={() => props.setValue(2)}
-              >
-                The Revolution
-              </Grid>
-              <Grid
-                item
-                className={classes.link}
-                component={Link}
-                to="/revolution"
-                onClick={() => props.setValue(2)}
-              >
-                Vision
-              </Grid>
-              <Grid
-                item
-                className={classes.link}
-                component={Link}
-                to="/revolution"
-                onClick={() => props.setValue(2)}
-              >
-                Technology
-              </Grid>
-              <Grid item className={classes.link} component={Link} to="/">
-                Process
-              </Grid>
+            <Grid item className={classes.gridItem}>
+                <Grid container direction="column" spacing={2}>
+                <Grid
+                    item
+                    className={classes.link}
+                    component={Link}
+                    to="/revolution"
+                    onClick={() => props.setValue(2)}
+                >
+                    The Revolution
+                </Grid>
+                <Grid
+                    item
+                    className={classes.link}
+                    component={Link}
+                    to="/revolution"
+                    onClick={() => props.setValue(2)}
+                >
+                    Vision
+                </Grid>
+                <Grid
+                    item
+                    className={classes.link}
+                    component={Link}
+                    to="/revolution"
+                    onClick={() => props.setValue(2)}
+                >
+                    Technology
+                </Grid>
+                <Grid item className={classes.link} component={Link} to="/">
+                    Process
+                </Grid>
+                </Grid>
             </Grid>
-          </Grid>
-          <Grid item className={classes.gridItem}>
-            <Grid container direction="column" spacing={2}>
-              <Grid
-                item
-                className={classes.link}
-                component={Link}
-                to="/about"
-                onClick={() => props.setValue(3)}
-              >
-                About Us
-              </Grid>
-              <Grid
-                item
-                className={classes.link}
-                component={Link}
-                to="/about"
-                onClick={() => props.setValue(3)}
-              >
-                History
-              </Grid>
-              <Grid
-                item
-                className={classes.link}
-                component={Link}
-                to="/about"
-                onClick={() => props.setValue(3)}
-              >
-                Team
-              </Grid>
+            <Grid item className={classes.gridItem}>
+                <Grid container direction="column" spacing={2}>
+                <Grid
+                    item
+                    className={classes.link}
+                    component={Link}
+                    to="/about"
+                    onClick={() => props.setValue(3)}
+                >
+                    About Us
+                </Grid>
+                <Grid
+                    item
+                    className={classes.link}
+                    component={Link}
+                    to="/about"
+                    onClick={() => props.setValue(3)}
+                >
+                    History
+                </Grid>
+                <Grid
+                    item
+                    className={classes.link}
+                    component={Link}
+                    to="/about"
+                    onClick={() => props.setValue(3)}
+                >
+                    Team
+                </Grid>
+                </Grid>
             </Grid>
-          </Grid>
-          <Grid item className={classes.gridItem}>
-            <Grid container directionm="column" spacing={2}>
-              <Grid
-                item
-                className={classes.link}
-                component={Link}
-                to="/contact"
-                onClick={() => props.setValue(4)}
-              >
-                Contact Us
-              </Grid>
+            <Grid item className={classes.gridItem}>
+                <Grid container directionm="column" spacing={2}>
+                <Grid
+                    item
+                    className={classes.link}
+                    component={Link}
+                    to="/contact"
+                    onClick={() => props.setValue(4)}
+                >
+                    Contact Us
+                </Grid>
+                </Grid>
             </Grid>
-          </Grid>
-        </Grid>
+            </Grid>
+        </Hidden>
         <img
-          className={classes.adornment}
-          alt="black decorative slash"
-          src={footerAdornment}
+        className={classes.adornment}
+        alt="black decorative slash"
+        src={footerAdornment}
         />
       </footer>
     );
